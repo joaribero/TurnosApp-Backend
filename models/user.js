@@ -2,11 +2,24 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
-    password: {type: String, required: true},
+    password: {type: String},
     email: {type: String},
     firstName: {type: String},
     lastName: {type: String},
-    date: {type:Date, default: Date.now}
+    date: {type:Date, default: Date.now},
+    facebookId: {type: String},
+    googleId: {type: String},
+    profilePicture: {type: String, default: '/images/profile.svg'},
+    socials: {
+        instragram: {type: String},
+        facebook: {type: String},
+        twitter: {type: String},
+        web: {type: String}
+    },
+    phones: [{
+        areaCode: {type: Number},
+        number: {type: Number}
+    }]
 });
 
 const User = mongoose.model("user",userSchema)

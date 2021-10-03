@@ -6,45 +6,26 @@ const auth = require('../controllers/authController');
 
 module.exports = app => {
 
-    router.post('/register', (req,res,next) => {
-        passport.authenticate('local-register', (err, user, info) => {
-            if (err) throw err;
-            if (info) return res.status(200).send({error: info});
+    // ----------------AUTH ----------------------------------
+    router.post('/addSocials', auth.setSocials);
+    router.post('/login', auth.login);
+    router.post('/register',auth.register);
+    router.get('/auth/facebook',auth.loginFacebook);
+    router.get('/user',auth.getUser);
+    router.get('/logout',auth.logout);
+    //router.get('/auth/facebook/callback',auth.facebookCallback);
+    router.get('/auth/google',auth.loginGoogle);
+    //router.get('/auth/google/callback',auth.googleCallback);
 
-            if (user) {
-                req.logIn(user, err => {
-                    if (err) throw err;
-                    return res.send("User created")
-                })              
-            }
-        })(req, res, next);
-    });
-    
-    router.post('/login', (req,res,next) => {
-        
-        passport.authenticate('local-login', (err,user,info) => {
-            if (err) throw err;
-            if (!user) res.status(200).send({error: info})
-            else {
-                req.logIn(user,err => {
-                    if (err) throw err;
-                    res.send("Succesfully Authenticated");
-                    //console.log(req.user);
-                })
-            }
-        })(req, res, next);
-    });
-    
-    router.get('/user', (req,res) => {
-        res.send(req.user);
+    router.get('/auth/facebook/callback', passport.authenticate('facebook', null), function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("http://localhost:3000/");
     });
 
-    router.get('/logout', 
-        async (req, res,next) => {
-            await req.logout();
-            res.send('Success');
-        }
-    );
+    router.get('/auth/google/callback', passport.authenticate('google', null), function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("http://localhost:3000/");
+    });
 
     app.use(router);
 }
