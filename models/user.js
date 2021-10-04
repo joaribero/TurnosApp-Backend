@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     googleId: {type: String},
     profilePicture: {type: String, default: '/images/profile.svg'},
     socials: {
-        instragram: {type: String},
+        instagram: {type: String},
         facebook: {type: String},
         twitter: {type: String},
         web: {type: String}

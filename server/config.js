@@ -1,13 +1,12 @@
 const express = require('express');
 const cors = require ('cors');
 const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
 const session = require('express-session');
-const bodyParser = require('body-parser');
-const User = require('../models/user');
 const routes = require('../routes/index');
+const MongoStore = require('connect-mongo');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 module.exports = app => {
 
@@ -29,7 +28,10 @@ module.exports = app => {
     app.use(session({
         secret: "mostvaluatesecret",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MongoStore({
+            mongoUrl: process.env.DB_URI
+        })
     }));
     app.use(cookieParser("mostvaluatesecret"));
     app.use(passport.initialize());

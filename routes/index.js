@@ -17,6 +17,9 @@ module.exports = app => {
     router.get('/auth/google',auth.loginGoogle);
     //router.get('/auth/google/callback',auth.googleCallback);
 
+
+    //TODO: Revisar porque si pasamos al controller esta lógica no encuentra las rutas
+    
     router.get('/auth/facebook/callback', passport.authenticate('facebook', null), function(req, res) {
         // Successful authentication, redirect home.
         res.redirect("http://localhost:3000/");

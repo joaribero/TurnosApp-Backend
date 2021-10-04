@@ -7,7 +7,7 @@ const ctrl = {};
 ctrl.register = (req,res,next) => {
     passport.authenticate('local-register', (err, user, info) => {
         if (err) throw err;
-        if (info) return res.status(200).send({error: info});
+        if (info) return res.status(200).send({error: info, category:'error'});
 
         if (user) {
             req.logIn(user, err => {
@@ -23,7 +23,7 @@ ctrl.login = (req,res,next) => {
         
     passport.authenticate('local-login', (err,user,info) => {
         if (err) throw err;
-        if (!user) res.status(200).send({error: info})
+        if (!user) res.status(200).send({error: info, category: 'error'})
         else {
             req.logIn(user,err => {
                 if (err) throw err;
@@ -55,9 +55,10 @@ ctrl.googleCallback = passport.authenticate('google', null), function(req, res) 
 
 // SET SOCIAL MEDIA INFO ON THE USER.
 ctrl.setSocials = async (req, res) => {
-    const user = await User.findOne({_id: req.user._id});
+
+    const user = await User.findOne({_id: req.user.id});
     if (!user) {
-        res.send({error: "Error de autenticación."})
+        res.send({error: "Error de autenticación.", category: "error"})
     } else {
         user.socials.instagram = req.body.instagram;
         user.socials.facebook = req.body.facebook;
@@ -66,7 +67,7 @@ ctrl.setSocials = async (req, res) => {
 
         await user.save();
 
-        res.send({msg: "Success"});
+        res.send({msg: "¡Redes actualizadas correctamente!", category: "success"});
     }
 };
 

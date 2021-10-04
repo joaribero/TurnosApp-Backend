@@ -118,13 +118,15 @@ module.exports = async (passport) => {
     passport.deserializeUser((id, cb) => {
         User.findOne({_id: id}, (err, user) => {
             const userInformation = {
+                id: id,
                 username: user.username,
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 facebookId: user.facebookId,
                 googleId: user.googleId,
-                picture: user.profilePicture
+                picture: user.profilePicture,
+                socials: user.socials
             };
             cb(err,userInformation);
         })
