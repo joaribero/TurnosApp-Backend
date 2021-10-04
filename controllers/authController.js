@@ -60,10 +60,15 @@ ctrl.setSocials = async (req, res) => {
     if (!user) {
         res.send({error: "Error de autenticación.", category: "error"})
     } else {
-        user.socials.instagram = req.body.instagram;
-        user.socials.facebook = req.body.facebook;
-        user.socials.twitter = req.body.twitter;
-        user.socials.web = req.body.web;
+        if (req.body.instagram) {
+            user.socials.instagram = req.body.instagram;
+        } else if (req.body.facebook) {
+            user.socials.facebook = req.body.facebook;
+        } else if (req.body.twitter) {
+            user.socials.twitter = req.body.twitter;
+        } else if (req.body.web) {
+            user.socials.web = req.body.web;
+        }            
 
         await user.save();
 
