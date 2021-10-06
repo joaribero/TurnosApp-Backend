@@ -3,12 +3,16 @@ const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
 const auth = require('../controllers/authController');
+const user = require('../controllers/userController');
 
 module.exports = app => {
 
-    // ----------------AUTH ----------------------------------
+    // ----------------USER ----------------------------------
     router.post('/addSocials', auth.setSocials);
     router.post('/setContactData', auth.setContactData);
+    router.get('/users', user.users);
+
+    // ----------------AUTH ----------------------------------
     router.post('/login', auth.login);
     router.post('/register',auth.register);
     router.get('/auth/facebook',auth.loginFacebook);
