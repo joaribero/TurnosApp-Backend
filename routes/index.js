@@ -8,6 +8,7 @@ module.exports = app => {
 
     // ----------------AUTH ----------------------------------
     router.post('/addSocials', auth.setSocials);
+    router.post('/setContactData', auth.setContactData);
     router.post('/login', auth.login);
     router.post('/register',auth.register);
     router.get('/auth/facebook',auth.loginFacebook);

@@ -83,5 +83,24 @@ ctrl.logout = async (req, res) => {
     res.send('Success');
 };
 
+ctrl.setContactData = async (req, res) => {
+    const user = await User.findOne({_id: req.user.id});
+    if (!user) {
+        res.send({error: "Error de autenticación.", category: "error"})
+    } else {
+
+        //hago esto por si el state que me manda no pose alguno de los campos.
+        //de esta forma evitamos eliminar datos que ya estaban cargados.
+        if (req.body.firstName) user.firstName = req.body.firstName;
+        if (req.body.lastName) user.lastName = req.body.lastName;
+        if (req.body.email) user.email = req.body.email;
+        if (req.body.areaCode) user.phones.areaCode = req.body.areaCode;
+        if (req.body.number) user.phones.number = req.body.number;
+
+        await user.save();
+        res.send({msg: '¡Datos actualizados correctamente!', category: 'success'});
+    }
+}
+
 
 module.exports = ctrl;

@@ -126,7 +126,8 @@ module.exports = async (passport) => {
                 facebookId: user.facebookId,
                 googleId: user.googleId,
                 picture: user.profilePicture,
-                socials: user.socials
+                socials: user.socials,
+                phones: user.phones
             };
             cb(err,userInformation);
         })

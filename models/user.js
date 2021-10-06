@@ -16,10 +16,10 @@ const userSchema = new mongoose.Schema({
         twitter: {type: String},
         web: {type: String}
     },
-    phones: [{
+    phones: {
         areaCode: {type: Number},
         number: {type: Number}
-    }]
+    }
 });
 
 const User = mongoose.model("user",userSchema)
