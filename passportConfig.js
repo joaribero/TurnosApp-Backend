@@ -120,6 +120,7 @@ module.exports = async (passport) => {
             const userInformation = {
                 id: id,
                 username: user.username,
+                roleId: user.roleId,
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,

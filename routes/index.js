@@ -10,7 +10,9 @@ module.exports = app => {
     // ----------------USER ----------------------------------
     router.post('/addSocials', auth.setSocials);
     router.post('/setContactData', auth.setContactData);
+    router.post('/addRole',user.createRole);
     router.get('/users', user.users);
+
 
     // ----------------AUTH ----------------------------------
     router.post('/login', auth.login);
