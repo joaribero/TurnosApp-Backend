@@ -12,6 +12,7 @@ module.exports = app => {
     router.post('/setContactData', auth.setContactData);
     router.post('/addRole',user.createRole);
     router.get('/users', user.users);
+    router.get('/getRoles', user.getRoles);
 
 
     // ----------------AUTH ----------------------------------

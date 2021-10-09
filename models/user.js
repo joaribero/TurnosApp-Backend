@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
     phones: {
         areaCode: {type: Number},
         number: {type: Number}
-    }
+    },
+    state: {type: Number}
 });
 
 const User = mongoose.model("user",userSchema)

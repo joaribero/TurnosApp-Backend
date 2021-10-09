@@ -11,8 +11,6 @@ ctrl.createRole = async (req, res) => {
         
         const count = (await Roles.find()).length;
 
-        console.log(req.body);
-
         let role = new Roles;
         role.Id = count + 1;
         role.Name = req.body.name;
@@ -22,9 +20,14 @@ ctrl.createRole = async (req, res) => {
         res.send({msg: 'Rol creado', category: 'success'});
     } else {
         res.send({msg: 'No posees los permisos necesarios para realizar esta acción.', category: 'error'});
-    }
+    }    
+}
 
-    
+ctrl.getRoles = async (req, res) => {
+
+    const roles = await Roles.find();
+    res.send(roles);
+
 }
 
 ctrl.users = async (req, res) => {

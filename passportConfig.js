@@ -128,7 +128,8 @@ module.exports = async (passport) => {
                 googleId: user.googleId,
                 picture: user.profilePicture,
                 socials: user.socials,
-                phones: user.phones
+                phones: user.phones,
+                state: user.state
             };
             cb(err,userInformation);
         })
