@@ -42,7 +42,7 @@ ctrl.createState = async (req, res) => {
         state.Name = req.body.name;
         state.Description = req.body.description
 
-        await role.save();
+        await state.save();
         res.send({msg: 'Estado creado', category: 'success'});
     } else {
         res.send({msg: 'No posees los permisos necesarios para realizar esta acción.', category: 'error'});
