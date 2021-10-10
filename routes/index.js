@@ -11,8 +11,10 @@ module.exports = app => {
     router.post('/addSocials', auth.setSocials);
     router.post('/setContactData', auth.setContactData);
     router.post('/addRole',user.createRole);
+    router.post('/addUserState', user.createState);
     router.get('/users', user.users);
     router.get('/getRoles', user.getRoles);
+    router.get('/getUserStates', user.getUserStates);
 
 
     // ----------------AUTH ----------------------------------
@@ -21,10 +23,10 @@ module.exports = app => {
     router.get('/auth/facebook',auth.loginFacebook);
     router.get('/user',auth.getUser);
     router.get('/logout',auth.logout);
-    //router.get('/auth/facebook/callback',auth.facebookCallback);
     router.get('/auth/google',auth.loginGoogle);
     //router.get('/auth/google/callback',auth.googleCallback);
-
+    //router.get('/auth/facebook/callback',auth.facebookCallback);
+    
 
     //TODO: Revisar porque si pasamos al controller esta lógica no encuentra las rutas
     

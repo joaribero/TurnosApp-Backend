@@ -7,6 +7,6 @@ const userStateSchema = mongoose.Schema({
     Description: {type: String},
 });
 
-const State = mongoose.model("State",roleSchema);
+const State = mongoose.model("State",userStateSchema);
 
 module.exports = State;
